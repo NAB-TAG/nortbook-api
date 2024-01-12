@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Validators\AuthValidator;
+use App\Services\AuthService;
+
 class AuthController extends Controller
 {
     private $authValidator;
+    private $authService;
 
-    public function __construct( AuthValidator $authValidator ){
+    public function __construct( AuthValidator $authValidator, AuthService $authService ){
+        $this->authService = $authService;
         $this->authValidator = $authValidator;
     }
     /**
@@ -24,8 +28,11 @@ class AuthController extends Controller
             return response()->json(["warning", "The user could not register", $validationResults->errors()->first()], 422);
         endif;
 
-        
-        return response()->json(["success", "Validation is finished", "Everything is in order."], 200);
+        // Register a user
+        $response = $this->authService->register( $request->all() );
+
+        // Response
+        return $response;
     }
 
     /**

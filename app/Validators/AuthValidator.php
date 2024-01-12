@@ -14,7 +14,7 @@ class AuthValidator implements AuthValidatorInterface
     {
         $rules = [
             'name' => ['required', 'max:60', 'string', new ForbiddenWordsRule],
-            'email' => ['required', 'max:100', 'email'],
+            'email' => ['required', 'max:100', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'max:255', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'],
             'confirmation_password' => ['required','same:password']
         ];
@@ -26,6 +26,7 @@ class AuthValidator implements AuthValidatorInterface
             'email.required' => 'The email is required. please enter a email to continue.',
             'email.max' => 'The email must have less than 100 characters.',
             'email.email' => 'The email must be in a valid email format.',
+            'email.unique' => 'There is already a user with that email, please enter another.',
             'password.required' => 'The password is required, please enter a name to continue.',
             'password.max' => 'The password must have less than 100 characters.',
             'password.regex' => 'The password must have at least one letter capital, a number and a symbol.',
