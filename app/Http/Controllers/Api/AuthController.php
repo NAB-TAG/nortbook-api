@@ -36,11 +36,17 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Log in
      */
-    public function store(Request $request)
+    public function login( Request $request )
     {
-        //
+        // Validate data
+        $validationResults = $this->authValidator->validateLogin( $request->all() );
+
+        if( $validationResults->fails() ):
+            return response()->json(["warning", "The user could not register", $validationResults->errors()->first()], 422);
+        endif;
+        return ["todo ok"];
     }
 
     /**
