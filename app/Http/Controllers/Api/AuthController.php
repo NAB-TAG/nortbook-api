@@ -46,15 +46,25 @@ class AuthController extends Controller
         if( $validationResults->fails() ):
             return response()->json(["warning", "The user could not register", $validationResults->errors()->first()], 422);
         endif;
-        return ["todo ok"];
+
+        // Log in user
+        $response = $this->authService->login( $request->all() );
+
+        // response
+        return $response;
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function logout()
     {
-        //
+        // Log out user
+        $response = $this->authService->logout();
+
+        // response
+        return $response;
     }
 
     /**
