@@ -55,7 +55,7 @@ class AuthService
 
             return response()->json(['token' => $decryptedToken], 201);
         } catch (\Throwable $th) {
-            return response()->json(["Operacion Fallida", "error", "Tienes que iniciar sesion"], 401);
+            return response()->json(["error","Failed operation", "The cookie 'auth_token' was not found, you did not start session or someone delete it."], 401);
         }
     }
 }

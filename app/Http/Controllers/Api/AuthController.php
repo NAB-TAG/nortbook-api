@@ -56,7 +56,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Close the session.
      */
     public function logout()
     {
@@ -68,26 +68,14 @@ class AuthController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Decrypt the token of the cookie that is used to verify if the user is logged up (for the front-end developer).
      */
-    public function edit(string $id)
+    public function decrypt()
     {
-        //
-    }
+        // Log out user
+        $response = $this->authService->decrypt();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // response
+        return $response;
     }
 }
