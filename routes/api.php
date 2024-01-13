@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +24,6 @@ Route::post('/login', [ AuthController::class, 'login' ]);
 Route::get('/logout', [ AuthController::class, 'logout' ]);
 // decrypt the cookie for front-end developer
 Route::get('/decrypt', [ AuthController::class, 'decrypt' ]);
+
+// books
+Route::post('/book/create', [ BookController::class, 'store' ]);

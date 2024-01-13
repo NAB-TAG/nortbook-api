@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 // Validators of the authenticate
 use App\Contracts\AuthValidatorInterface;
 use App\Validators\AuthValidator;
+// Validators of the book
+use App\Contracts\BookValidatorInterface;
+use App\Validators\BookValidator;
 
 use App\Rules\ForbiddenWordsRule;
 
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             AuthValidatorInterface::class,
             AuthValidator::class,
+            BookValidatorInterface::class,
+            BookValidator::class,
         );
     }
 
