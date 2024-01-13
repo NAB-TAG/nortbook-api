@@ -26,4 +26,14 @@ class BookService
         }
     }
 
+
+    public function index()
+    {
+        $books = Book::orderBy('id', 'asc')->paginate(
+                $perPage = 12, $columns = [ "*" ]
+            )->onEachSide(0);
+        return $books;
+    }
+
+    
 }
