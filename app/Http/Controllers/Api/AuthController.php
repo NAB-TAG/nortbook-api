@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use Laravel\Sanctum\PersonalAccessToken;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Validators\AuthValidator;
 use App\Services\AuthService;
-
+use Cookie;
 class AuthController extends Controller
 {
     private $authValidator;
@@ -16,6 +17,16 @@ class AuthController extends Controller
         $this->authService = $authService;
         $this->authValidator = $authValidator;
     }
+
+    public function index(Request $request)
+    {
+        // Get the user connected
+        $response = $this->authService->index();
+
+        // Response
+        return $response;
+    }
+
     /**
      * Register user
      */

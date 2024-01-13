@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Validators\BookValidator;
+use App\Services\BookService;
+
 class BookController extends Controller
 {
     private $bookValidator;
-    public function __construct( BookValidator $bookValidator )
+    private $bookService;
+
+    public function __construct( BookValidator $bookValidator, BookService $bookService )
     {
+        $this->bookService = $bookService;
         $this->bookValidator = $bookValidator;  
     }
     /**
@@ -32,6 +37,12 @@ class BookController extends Controller
         if( $validationResults->fails() ):
             return response()->json(["warning", "The book could not save", $validationResults->errors()->first()], 422);
         endif;
+
+        // Create new book
+        $response = $this->bookService->store( $request->all() );
+
+        // Response
+        return $response;
     }
 
     /**

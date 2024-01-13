@@ -41,6 +41,13 @@ class AuthService
         }
     }
 
+    public function index()
+    {
+        $user = auth('sanctum')->user();
+
+        return $user;
+    }
+
     public function logout()
     {
         $cookie = Cookie::forget('auth_token');
