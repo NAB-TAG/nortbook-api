@@ -60,7 +60,18 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate data
+        $validationResults = $this->bookValidator->validate( $request->all() );
+
+        if( $validationResults->fails() ):
+            return response()->json(["warning", "The book could not update", $validationResults->errors()->first()], 422);
+        endif;
+
+        // Create new book
+        // $response = $this->bookService->update( $request->all() );
+
+        // Response
+        // return $response;
     }
 
     /**
