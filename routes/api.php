@@ -35,4 +35,7 @@ Route::put('/book/edit/{id}', [ BookController::class, 'update']);
 Route::delete('/book/delete/{id}', [ BookController::class, 'destroy']);
 
 // reviews
-Route::post('/review/create', [ ReviewController::class, 'store' ]);
+Route::get('/reviews/book/{id}', [ ReviewController::class, 'index' ]);
+Route::post('/review/create/{id}', [ ReviewController::class, 'store' ]);
+Route::put('/review/edit/{id}', [ ReviewController::class, 'update' ]);
+Route::delete('/review/delete/{id}', [ ReviewController::class, 'destroy' ]);
