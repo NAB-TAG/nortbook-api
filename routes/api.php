@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\ReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,3 +33,6 @@ Route::post('/book/create', [ BookController::class, 'store' ]);
 Route::get('/books', [ BookController::class, 'index']);
 Route::put('/book/edit/{id}', [ BookController::class, 'update']);
 Route::delete('/book/delete/{id}', [ BookController::class, 'destroy']);
+
+// reviews
+Route::post('/review/create', [ ReviewController::class, 'store' ]);
