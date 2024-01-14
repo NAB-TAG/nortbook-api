@@ -35,5 +35,23 @@ class BookService
         return $books;
     }
 
-    
+    public function update( array $data, $id )
+    {
+        $book = Book::find($id);
+        $user = auth('sanctum')->user();
+        if(!isset($user)):
+            return response()->json(["error", "Failed operation", "There is no connected user."], 201);
+        endif;
+        
+        if ( $user->name == $book->author) {
+            $book->title = $data[ 'title' ];
+            $book->publication_year = $data[ "publication_year" ];
+            $book->author = $user->name;
+            if ( $book->save() ) {
+                return response()->json(["success", "Successful operation", "The book has update successfully."], 201);
+            } 
+            return response()->json(["error", "Failed operation", "The book has not update."], 500);
+        }
+        return response()->json(["error", "Failed operation", "The book is not yours."], 201);       
+    }
 }

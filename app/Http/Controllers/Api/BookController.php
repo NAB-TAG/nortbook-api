@@ -58,7 +58,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         // Validate data
         $validationResults = $this->bookValidator->validate( $request->all() );
@@ -68,10 +68,10 @@ class BookController extends Controller
         endif;
 
         // Create new book
-        // $response = $this->bookService->update( $request->all() );
+        $response = $this->bookService->update( $request->all(), $id );
 
         // Response
-        // return $response;
+        return $response;
     }
 
     /**
