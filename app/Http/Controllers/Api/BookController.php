@@ -79,6 +79,8 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $response = $this->bookService->destroy($id);
+
+        return $response;
     }
 }

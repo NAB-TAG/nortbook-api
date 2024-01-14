@@ -52,6 +52,16 @@ class BookService
             } 
             return response()->json(["error", "Failed operation", "The book has not update."], 500);
         }
-        return response()->json(["error", "Failed operation", "The book is not yours."], 201);       
+        return response()->json(["error", "Failed operation", "The book is not yours."], 505);       
+    }
+
+    public function destroy( $id )
+    {
+        $book = Book::find($id);
+
+        if ( $book->delete() ) {
+            return response()->json(["success", "Successful operation", "The book could be deleted without problems."], 201);
+        }
+        return response()->json(["error", "Failed operation", "The book could not be deleted."], 201);  
     }
 }
